@@ -1,0 +1,248 @@
+/* Base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: clamp(0.9375rem, 0.85rem + 0.4vw, 1rem);
+  line-height: 1.5;
+  color: #1c1917;
+  background: linear-gradient(160deg, #f5f2eb 0%, #ebe6dc 45%, #e8e4db 100%);
+}
+
+.page {
+  width: 100%;
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 1.75rem);
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.header {
+  margin-bottom: clamp(1.25rem, 4vw, 2rem);
+}
+
+.title {
+  margin: 0 0 0.35em;
+  font-size: clamp(1.35rem, 1.1rem + 1.2vw, 1.75rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  margin: 0;
+  color: #57534e;
+  font-size: 0.9em;
+  max-width: 32ch;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.5rem);
+}
+
+/* Card panel for crop area + actions */
+.panel {
+  background: #fffef9;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  border-radius: clamp(0.65rem, 2vw, 0.85rem);
+  box-shadow: 0 1px 2px rgba(28, 25, 23, 0.04), 0 8px 24px rgba(28, 25, 23, 0.06);
+  padding: clamp(1rem, 4vw, 1.35rem);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #44403c;
+}
+
+/* Styled file picker — full-width tap target on small screens */
+.file-picker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1rem;
+  border: 1px dashed #a8a29e;
+  border-radius: 0.5rem;
+  background: #fafaf8;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.file-picker:hover,
+.file-picker:focus-within {
+  border-color: #57534e;
+  background: #f5f5f4;
+}
+
+.file-picker input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 0;
+}
+
+.file-picker__text {
+  font-weight: 500;
+  color: #44403c;
+  pointer-events: none;
+}
+
+/* Cropper region: fluid width, bounded max for desktop */
+.cropper-wrap {
+  width: 100%;
+  max-width: min(100%, 22rem);
+  margin-inline: auto;
+  min-height: 8rem;
+}
+
+/* Hide until a file sets src — avoids the broken-image icon for an empty <img> */
+#image {
+  display: none;
+  max-width: 100%;
+  height: auto;
+}
+
+#image[src]:not([src=""]) {
+  display: block;
+}
+
+/* Cropper.js fills container on small viewports */
+.cropper-wrap .cropper-container,
+.cropper-wrap .cropper-wrap-box,
+.cropper-wrap .cropper-canvas img {
+  max-width: 100%;
+}
+
+.crop-toolbar {
+  margin-top: clamp(0.85rem, 3vw, 1.15rem);
+  padding-top: clamp(0.85rem, 3vw, 1.15rem);
+  border-top: 1px solid rgba(28, 25, 23, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.crop-toolbar__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.crop-toolbar__buttons .btn {
+  flex: 1 1 auto;
+  min-width: min(100%, 8rem);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 480px) {
+  .actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .actions .btn {
+    flex: 1 1 auto;
+    min-width: 10rem;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 0.5rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  color: #fffef9;
+  background: #1c1917;
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.2);
+}
+
+.btn-primary:hover {
+  background: #292524;
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid #1c1917;
+  outline-offset: 2px;
+}
+
+.btn-secondary {
+  color: #1c1917;
+  background: #f5f5f4;
+  border: 1px solid #d6d3d1;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e7e5e4;
+  border-color: #a8a29e;
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid #57534e;
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Slightly wider layout on large phones / tablets in landscape */
+@media (min-width: 600px) {
+  .page {
+    max-width: 40rem;
+  }
+
+  .cropper-wrap {
+    max-width: min(100%, 26rem);
+  }
+}
+
+@media (min-width: 900px) {
+  .page {
+    max-width: 44rem;
+    padding-top: 2rem;
+  }
+}

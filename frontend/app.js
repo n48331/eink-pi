@@ -2,6 +2,23 @@ let cropper = null;
 
 const input = document.getElementById("inputImage");
 const image = document.getElementById("image");
+const rotateLeftBtn = document.getElementById("rotateLeft");
+const rotateRightBtn = document.getElementById("rotateRight");
+
+function setRotateControlsEnabled(enabled) {
+  rotateLeftBtn.disabled = !enabled;
+  rotateRightBtn.disabled = !enabled;
+}
+
+setRotateControlsEnabled(false);
+
+rotateLeftBtn.addEventListener("click", () => {
+  if (cropper) cropper.rotate(-90);
+});
+
+rotateRightBtn.addEventListener("click", () => {
+  if (cropper) cropper.rotate(90);
+});
 
 // Handle image selection
 input.addEventListener("change", function (e) {
@@ -17,6 +34,8 @@ input.addEventListener("change", function (e) {
     cropper = null;
   }
 
+  setRotateControlsEnabled(false);
+
   image.src = url;
 
   // Wait for image to load before initializing cropper
@@ -28,6 +47,7 @@ input.addEventListener("change", function (e) {
       responsive: true,
       background: false,
     });
+    setRotateControlsEnabled(true);
   };
 });
 

@@ -1,27 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>E-Ink Upload</title>
-
-  <!-- ✅ Correct Cropper v1 (ONLY this version) -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CSIITT - E-Ink Upload</title>
   <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
 </head>
 <body>
 
-<h3>Upload & Crop</h3>
+<div class="page">
+  <header class="header">
+    <h1 class="title">Upload &amp; crop</h1>
+    <p class="subtitle">212×104 preview for your e-ink display. Pick a photo, adjust the crop, then upload.</p>
+  </header>
 
-<input type="file" id="inputImage">
-<br><br>
+  <main class="main">
+    <div class="panel">
+      <div class="field">
+        <span class="field-label" id="file-label">Image</span>
+        <label class="file-picker" aria-labelledby="file-label">
+          <span class="file-picker__text">Choose image…</span>
+          <input type="file" id="inputImage" accept="image/*">
+        </label>
+      </div>
+    </div>
 
-<img id="image" style="max-width:300px;">
-<br><br>
+    <div class="panel">
+      <div class="cropper-wrap">
+        <img id="image" alt="Image to crop">
+      </div>
+      <div class="crop-toolbar">
+        <span class="field-label" id="rotate-label">Rotate</span>
+        <div class="crop-toolbar__buttons" role="group" aria-labelledby="rotate-label">
+          <button type="button" class="btn btn-secondary" id="rotateLeft" disabled aria-label="Rotate image 90 degrees counter-clockwise">Rotate left</button>
+          <button type="button" class="btn btn-secondary" id="rotateRight" disabled aria-label="Rotate image 90 degrees clockwise">Rotate right</button>
+        </div>
+      </div>
+    </div>
 
-<button onclick="upload()">Upload</button>
+    <div class="actions">
+      <button type="button" class="btn btn-primary" onclick="upload()">Upload</button>
+    </div>
+  </main>
+</div>
 
-<!-- ✅ Load Cropper FIRST -->
 <script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
-
-<!-- ✅ Then your app -->
 <script src="app.js"></script>
 
 </body>
