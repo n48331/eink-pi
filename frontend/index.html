@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E-Ink Upload</title>
+
+  <!-- ✅ Correct Cropper v1 (ONLY this version) -->
+  <link href="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.css" rel="stylesheet">
+</head>
+<body>
+
+<h3>Upload & Crop</h3>
+
+<input type="file" id="inputImage">
+<br><br>
+
+<img id="image" style="max-width:300px;">
+<br><br>
+
+<button onclick="upload()">Upload</button>
+
+<!-- ✅ Load Cropper FIRST -->
+<script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.13/dist/cropper.min.js"></script>
+
+<!-- ✅ Then your app -->
+<script src="app.js"></script>
+
+</body>
+</html>
